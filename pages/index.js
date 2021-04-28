@@ -2,17 +2,17 @@
 /* eslint-disable import/named */
 // import { Image, renderMetaTags } from 'react-datocms';
 // import Head from 'next/head';
-import { allProducts } from '../lib/api';
+// import { allProducts } from '../lib/api';
 
-export async function getStaticProps() {
-  const products = await allProducts();
+// export async function getStaticProps() {
+//   const products = await allProducts();
 
-  return {
-    props: {
-      products,
-    },
-  };
-}
+//   return {
+//     props: {
+//       products,
+//     },
+//   };
+// }
 
 const Home = () => <div>Start Page</div>;
 
