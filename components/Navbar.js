@@ -1,30 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
-import Router from 'next/router';
+import { useEffect, useState } from 'react';
+import Router, { useRouter } from 'next/router';
 import {
   AppBar,
-  Typography,
   Toolbar,
   makeStyles,
   IconButton,
-  Drawer,
-  ListItem,
-  List,
-  ListItemIcon,
-  ListItemText,
   Badge,
   CssBaseline,
+  Hidden,
+  useTheme,
+  Button,
+  emphasize,
 } from '@material-ui/core';
 
-import {
-  RiMenu2Line,
-  RiHandbagLine,
-  RiLoginBoxLine,
-  RiAddLine,
-} from 'react-icons/ri';
+import { RiMenu2Line, RiHandbagLine, RiLoginBoxLine } from 'react-icons/ri';
 
 import Link from 'next/link';
+
+import Sidebar from './Sidebar';
+import Cart from './Cart';
 
 const drawerWidth = 240;
 
@@ -50,56 +46,81 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  toolbar: {
+    [theme.breakpoints.up('sm')]: {
+      height: '100px',
+    },
+  },
   menuButton: {
     marginRight: 36,
   },
-  hide: {
-    display: 'none',
+  listContainer: {
+    width: '300px',
+    marginLeft: 'auto',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
+  listButton: {
+    marginRight: '50px',
   },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
+  iconsContainer: {
+    marginLeft: 'auto',
   },
 }));
 
+const menuList = [
+  {
+    name: 'Home',
+    href: '/',
+  },
+  {
+    name: 'Products',
+    href: '/',
+  },
+  {
+    name: 'Add Product',
+    href: '/',
+  },
+];
+
 export default function Navbar() {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const theme = useTheme();
+  const arrayPaths = ['/'];
 
-  const handleDrawerOpen = () => {
-    setOpen(!open);
+  const [onTop, setOnTop] = useState(!!arrayPaths.includes(router.pathname));
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+
+  const handleSidebarOpen = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleCartOpen = () => {
+    setCartOpen(!cartOpen);
   };
+
+  const headerClass = () => {
+    if (window.pageYOffset === 0) {
+      setOnTop(true);
+    } else {
+      setOnTop(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!arrayPaths.includes(router.pathname)) {
+      return;
+    }
+
+    headerClass();
+    // eslint-disable-next-line func-names
+    window.onscroll = function () {
+      headerClass();
+    };
+  }, [arrayPaths, router.pathname]);
 
   return (
     <div className={classes.root}>
@@ -107,30 +128,40 @@ export default function Navbar() {
       <AppBar
         position="fixed"
         elevation={0}
-        color="default"
+        color={onTop ? 'transparent' : 'inherit'}
         className={classes.appBar}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
-            color="inherit"
             aria-label="menu"
-            onClick={(e) => handleDrawerOpen()}
+            onClick={(e) => handleSidebarOpen()}
           >
-            <RiMenu2Line />
+            <RiMenu2Line color={!onTop || sidebarOpen ? 'black' : 'white'} />
           </IconButton>
-          <Typography
-            variant="h5"
-            noWrap
-            className={classes.title}
-            onClick={() => Router.replace('/')}
-          >
-            Consid Commerce
-          </Typography>
-          <div style={{ flex: 'right' }}>
-            <IconButton color="inherit" aria-label="4 items in cart">
-              <Badge badgeContent={4}>
-                <RiHandbagLine />
+          <Hidden smDown>
+            <div className={classes.listContainer}>
+              {menuList.map((el) => (
+                <div
+                  style={{ color: onTop ? 'white' : 'black', fontSize: '18px' }}
+                  key={el.name}
+                >
+                  <Link href={el.href}>
+                    <a>{el.name}</a>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </Hidden>
+
+          <div className={classes.iconsContainer}>
+            <IconButton
+              onClick={(e) => handleCartOpen()}
+              color="inherit"
+              aria-label="4 items in cart"
+            >
+              <Badge badgeContent={1} color="secondary">
+                <RiHandbagLine color={!onTop ? 'inherit' : 'white'} />
               </Badge>
             </IconButton>
             <IconButton
@@ -139,30 +170,13 @@ export default function Navbar() {
               aria-haspopup="true"
               color="inherit"
             >
-              <RiLoginBoxLine />
+              <RiLoginBoxLine color={!onTop ? 'inherit' : 'white'} />
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        open={open}
-        onClose={(e) => handleDrawerClose()}
-      >
-        <div className={classes.toolbar} />
-        <List>
-          <ListItem button onClick={(e) => {}}>
-            <ListItemIcon>
-              <RiAddLine />
-            </ListItemIcon>
-            <ListItemText primary="Create Post" />
-          </ListItem>
-        </List>
-      </Drawer>
+      <Sidebar open={sidebarOpen} handleSidebarOpen={handleSidebarOpen} />
+      <Cart open={cartOpen} handleCartOpen={handleCartOpen} />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { RiAddLine } from 'react-icons/ri';
 
-const drawerWidth = 300;
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-  toolbar: theme.mixins.toolbar,
+  toolbar: '100px',
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -45,20 +45,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // eslint-disable-next-line react/prop-types
-const Cart = ({ open, handleCartOpen }) => {
+const Cart = ({ open, handleSidebarOpen }) => {
   const classes = useStyles();
 
   return (
     <SwipeableDrawer
       className={classes.drawer}
-      variant="temporary"
-      anchor="right"
+      variant="persistent"
       classes={{
         paper: classes.drawerPaper,
       }}
       open={open}
-      onClose={() => handleCartOpen()}
-      onOpen={() => handleCartOpen()}
+      onClose={() => handleSidebarOpen()}
     >
       <div className={classes.toolbar} />
       <List>
