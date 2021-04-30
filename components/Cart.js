@@ -3,7 +3,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  SwipeableDrawer,
+  Drawer,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { RiAddLine } from 'react-icons/ri';
@@ -49,7 +49,7 @@ const Cart = ({ open, handleCartOpen }) => {
   const classes = useStyles();
 
   return (
-    <SwipeableDrawer
+    <Drawer
       className={classes.drawer}
       variant="temporary"
       anchor="right"
@@ -58,7 +58,6 @@ const Cart = ({ open, handleCartOpen }) => {
       }}
       open={open}
       onClose={() => handleCartOpen()}
-      onOpen={() => handleCartOpen()}
     >
       <div className={classes.toolbar} />
       <List>
@@ -69,7 +68,7 @@ const Cart = ({ open, handleCartOpen }) => {
           <ListItemText primary="Create Post" />
         </ListItem>
       </List>
-    </SwipeableDrawer>
+    </Drawer>
   );
 };
 

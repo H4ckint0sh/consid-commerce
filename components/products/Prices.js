@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import {
   FormControl,
   FormControlLabel,
@@ -43,13 +44,12 @@ const Prices = () => (
   <FormControl component="fieldset">
     <FormLabel component="legend">Choose from Prices</FormLabel>
     <RadioGroup aria-label="prices" name="prices">
-      {prices.map((price) => (
+      {prices.map((price, index) => (
         <FormControlLabel
-          key={price.id}
+          key={index}
           control={<Radio color="primary" />}
           value={price.id}
           label={price.name}
-          onChange
         />
       ))}
     </RadioGroup>

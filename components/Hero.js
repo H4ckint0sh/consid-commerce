@@ -65,7 +65,7 @@ const Hero = ({ img, title }) => {
             container
             item
             alignItems="center"
-            justifyContent={isScreenMedium ? 'center' : 'flex-start'}
+            justify={isScreenMedium ? 'center' : 'flex-start'}
             xs={isScreenMedium ? 8 : 4}
           >
             <Grid>

@@ -27,7 +27,7 @@ const Categories = () => (
           key={category.id}
           control={
             <Checkbox
-              checked={false}
+              // checked={false}
               name={category.id}
               fontSize="small"
               color="primary"
