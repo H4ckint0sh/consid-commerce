@@ -7,6 +7,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import '../styles/globals.css';
 
+// redux
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+
 import Layout from '../components/Layout';
 import theme from '../config/theme';
 
@@ -30,13 +34,15 @@ export default function MyApp(props) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </Provider>
     </>
   );
 }
