@@ -171,13 +171,7 @@ const ColorGrid = () => {
   ];
 
   return (
-    <Grid
-      spacing={3}
-      md={12}
-      direction="row"
-      container
-      className={classes.root}
-    >
+    <Grid spacing={3} direction="row" container className={classes.root}>
       {colors.map((color, index) => (
         <Grid key={index} item>
           <Chip component="div" className={color} />

@@ -95,7 +95,7 @@ export default function Navbar() {
   const theme = useTheme();
   const arrayPaths = ['/'];
 
-  const [onTop, setOnTop] = useState(!!arrayPaths.includes(router.pathname));
+  const [onTop, setOnTop] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -116,7 +116,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    if (!arrayPaths.includes(router.pathname)) {
+    if (router.pathname !== '/') {
       return;
     }
 
@@ -129,7 +129,7 @@ export default function Navbar() {
     return () => {
       setOnTop(!onTop);
     };
-  }, [arrayPaths, onTop, router.pathname]);
+  }, [onTop, router.pathname]);
 
   return (
     <div className={classes.root}>
