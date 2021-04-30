@@ -15,7 +15,11 @@ import {
   emphasize,
 } from '@material-ui/core';
 
-import { RiMenu2Line, RiHandbagLine, RiLoginBoxLine } from 'react-icons/ri';
+import {
+  RiMenu2Line,
+  RiShoppingCartLine,
+  RiLoginBoxLine,
+} from 'react-icons/ri';
 
 import Link from 'next/link';
 
@@ -160,8 +164,8 @@ export default function Navbar() {
               color="inherit"
               aria-label="4 items in cart"
             >
-              <Badge badgeContent={1} color="secondary">
-                <RiHandbagLine color={!onTop ? 'inherit' : 'white'} />
+              <Badge badgeContent={1} color="primary">
+                <RiShoppingCartLine color={!onTop ? 'inherit' : 'white'} />
               </Badge>
             </IconButton>
             <IconButton
