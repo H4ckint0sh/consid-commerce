@@ -48,44 +48,47 @@ const Hero = ({ img }) => {
   const isScreenMedium = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <div
-      className={classes.container}
-      style={{
-        backgroundImage: `url(${img})`,
-      }}
-    >
-      <Grid style={{ height: '100%' }} justify="center" container>
-        <Hidden mdDown>
-          <Grid item xs={8} />
-        </Hidden>
-        <Grid
-          container
-          item
-          alignItems="center"
-          justifyContent={isScreenMedium ? 'center' : 'flex-start'}
-          xs={isScreenMedium ? 8 : 4}
-        >
-          <Grid>
-            <Typography
-              className={classes.primaryTitle}
-              display="inline"
-              variant="h2"
-            >
-              Use Consid Commers <span className={classes.span}>Buy Smart</span>
-            </Typography>
-            <br />
-            <Button
-              className={classes.button}
-              size={isScreenMedium ? 'medium' : 'large'}
-              variant="contained"
-              color="primary"
-            >
-              Start Shopping
-            </Button>
+    <section>
+      <div
+        className={classes.container}
+        style={{
+          backgroundImage: `url(${img})`,
+        }}
+      >
+        <Grid style={{ height: '100%' }} justify="center" container>
+          <Hidden mdDown>
+            <Grid item xs={8} />
+          </Hidden>
+          <Grid
+            container
+            item
+            alignItems="center"
+            justifyContent={isScreenMedium ? 'center' : 'flex-start'}
+            xs={isScreenMedium ? 8 : 4}
+          >
+            <Grid>
+              <Typography
+                className={classes.primaryTitle}
+                display="inline"
+                variant="h2"
+              >
+                Use Consid Commers{' '}
+                <span className={classes.span}>Buy Smart</span>
+              </Typography>
+              <br />
+              <Button
+                className={classes.button}
+                size={isScreenMedium ? 'medium' : 'large'}
+                variant="contained"
+                color="primary"
+              >
+                Start Shopping
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
+    </section>
   );
 };
 

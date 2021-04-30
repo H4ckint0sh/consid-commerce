@@ -80,11 +80,11 @@ const menuList = [
   },
   {
     name: 'Products',
-    href: '/',
+    href: '/products',
   },
   {
     name: 'Add Product',
-    href: '/',
+    href: '/add',
   },
 ];
 

@@ -1,37 +1,42 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
   Card,
   CardContent,
   CardMedia,
-  Button,
   Typography,
   IconButton,
 } from '@material-ui/core';
 
-import { RiShoppingCartLine } from 'react-icons/ri';
+import { RiShoppingCartLine, RiHeartAddLine } from 'react-icons/ri';
 
 const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 210,
     maxWidth: 210,
     position: 'relative',
-    '&:hover $overlay': {
+    transform: 'scale(.95)',
+    transition: 'box-shadow 1s, transform .5s',
+    '&:hover': {
       opacity: 1,
+      transform: 'scale(1)',
+      boxShadow: '5px 20px 30px rgba(0, 0, 0, 0.2)',
     },
     '&:hover $overlayText': {
       opacity: 1,
     },
   },
   media: {
+    width: '100%',
     height: 250,
     backgroundSize: 'contain',
   },
   overlay: {
     height: 250,
-    background: '#40e6b985',
+    background: 'rgba(0,0,0, .2)',
     position: 'absolute',
     width: '100%',
     left: 0,
@@ -41,22 +46,11 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
     transition: 'all 0.4s ease-in-out 0s',
   },
-  overlaySelected: {
-    height: 250,
-    background: '#40e6b985',
-    position: 'absolute',
-    width: '100%',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    opacity: 1,
-    transition: 'all 0.4s ease-in-out 0s',
-  },
   overlayText: {
     height: 250,
     position: 'absolute',
     textAlign: 'center',
+    paddingTop: '1em',
     paddingLeft: '1em',
     paddingRight: '1em',
     width: '100%',
@@ -66,9 +60,6 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     opacity: 0,
     transition: 'all 0.3s ease-in-out 0s',
-  },
-  btnMargin: {
-    margin: theme.spacing(1),
   },
   title: {
     fontWeight: 'bold',
@@ -86,15 +77,23 @@ export default function ProductCard({ data }) {
         image={data.mainImage.url}
         title={data.name}
       />
-      <Grid container justify="center" alignItems="center" />
       <Grid
         container
         justify="center"
         alignItems="center"
+        className={classes.overlay}
+      />
+      <Grid
+        container
+        justify="flex-end"
+        alignItems="flex-start"
         className={classes.overlayText}
       >
-        <IconButton>
-          <RiShoppingCartLine color="secondary" />
+        <IconButton color="primary">
+          <RiShoppingCartLine />
+        </IconButton>
+        <IconButton color="primary">
+          <RiHeartAddLine />
         </IconButton>
       </Grid>
       <CardContent>
@@ -102,7 +101,7 @@ export default function ProductCard({ data }) {
           <Typography variant="h6" component="h6" className={classes.title}>
             {data.name}
           </Typography>
-          <Typography>{data.price}</Typography>
+          <Typography color="primary">{data.price} $</Typography>
         </Grid>
       </CardContent>
     </Card>

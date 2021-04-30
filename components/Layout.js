@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Layout = ({ children }) => (
   <>
@@ -8,6 +9,9 @@ const Layout = ({ children }) => (
       <Navbar />
     </header>
     {children}
+    <footer>
+      <Footer />
+    </footer>
   </>
 );
 

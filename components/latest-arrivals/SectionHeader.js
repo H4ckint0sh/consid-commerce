@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Typography } from '@material-ui/core';
@@ -8,7 +9,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ProductCard = () => {
+const ProductCard = ({ title }) => {
   const classes = useStyles();
 
   return (
@@ -16,14 +17,13 @@ const ProductCard = () => {
       <Grid
         container
         direction="row"
-        justify="space-between"
+        justify="center"
         alignItems="center"
         className={classes.header}
       >
-        <Typography variant="h6" gutterBottom>
-          {/* {props.title} */}
+        <Typography variant="h4" gutterBottom>
+          {title}
         </Typography>
-        {/* {props.children} */}
       </Grid>
     </Box>
   );

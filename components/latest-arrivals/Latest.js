@@ -5,10 +5,12 @@ import ProductList from './ProductList';
 import SectionHeader from './SectionHeader';
 
 const Latest = ({ data }) => (
-  <Container maxWidth="md">
-    <SectionHeader title="Latest Arrivals" />
-    <ProductList data={data} />
-  </Container>
+  <section>
+    <Container maxWidth="md">
+      <SectionHeader title="Latest Arrivals" />
+      <ProductList data={data} />
+    </Container>
+  </section>
 );
 
 export default Latest;
