@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
+import Link from 'next/link';
+
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.down('sm')]: {
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Hero = ({ img }) => {
+const Hero = ({ img, title }) => {
   const classes = useStyles();
   const theme = useTheme();
   const isScreenMedium = useMediaQuery(theme.breakpoints.down('md'));
@@ -72,18 +74,21 @@ const Hero = ({ img }) => {
                 display="inline"
                 variant="h2"
               >
-                Use Consid Commers{' '}
-                <span className={classes.span}>Buy Smart</span>
+                {/* Use Consid Commers{' '}
+                <span className={classes.span}>Buy Smart</span> */}
+                {title}
               </Typography>
               <br />
-              <Button
-                className={classes.button}
-                size={isScreenMedium ? 'medium' : 'large'}
-                variant="contained"
-                color="primary"
-              >
-                Start Shopping
-              </Button>
+              <Link href="/products">
+                <Button
+                  className={classes.button}
+                  size={isScreenMedium ? 'medium' : 'large'}
+                  variant="contained"
+                  color="primary"
+                >
+                  Start Shopping
+                </Button>
+              </Link>
             </Grid>
           </Grid>
         </Grid>

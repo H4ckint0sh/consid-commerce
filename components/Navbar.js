@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
@@ -124,7 +125,11 @@ export default function Navbar() {
     window.onscroll = function () {
       headerClass();
     };
-  }, [arrayPaths, router.pathname]);
+
+    return () => {
+      setOnTop(!onTop);
+    };
+  }, [arrayPaths, onTop, router.pathname]);
 
   return (
     <div className={classes.root}>

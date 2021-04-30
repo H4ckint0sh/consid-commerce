@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader';
 const Latest = ({ data }) => (
   <section>
     <Container maxWidth="md">
-      <SectionHeader title="Latest Arrivals" />
+      <SectionHeader title="New Arrivals" />
       <ProductList data={data} />
     </Container>
   </section>

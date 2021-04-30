@@ -18,7 +18,7 @@ export async function getStaticProps() {
 
 const Home = ({ content, products }) => (
   <>
-    <Hero img={content.mainImage.url} />
+    <Hero img={content.mainImage.url} title={content.title} />
     <Latest data={products} />
   </>
 );
