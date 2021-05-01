@@ -1,14 +1,9 @@
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Drawer,
-} from '@material-ui/core';
+import { Drawer, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { RiAddLine } from 'react-icons/ri';
+// import { RiAddLine } from 'react-icons/ri';
+import CartItemCard from './CartItemCard';
 
-const drawerWidth = 300;
+const drawerWidth = 320;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -37,9 +32,8 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
+  title: {
+    textAlign: 'center',
     padding: theme.spacing(3),
   },
 }));
@@ -59,15 +53,10 @@ const Cart = ({ open, handleCartOpen }) => {
       open={open}
       onClose={() => handleCartOpen()}
     >
-      <div className={classes.toolbar} />
-      <List>
-        <ListItem button onClick={() => {}}>
-          <ListItemIcon>
-            <RiAddLine />
-          </ListItemIcon>
-          <ListItemText primary="Create Post" />
-        </ListItem>
-      </List>
+      <Typography className={classes.title} variant="h5">
+        Shopping Cart
+      </Typography>
+      <CartItemCard />
     </Drawer>
   );
 };
