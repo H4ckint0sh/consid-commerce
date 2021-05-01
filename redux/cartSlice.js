@@ -1,53 +1,63 @@
-/* eslint-disable nonblock-statement-body-position */
-/* eslint-disable consistent-return */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable no-undef */
+/* eslint-disable no-return-assign */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-else-return */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-
-// find index of item if item is already in cart
-const getItemIndex = (state, idToFind) => {
-  const ids = state.cartItems.map((item) => item.id);
-  return ids.indexOf(idToFind);
-};
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cartItems: [],
+    totalAmount: 0,
   },
   reducers: {
-    addToCart: (state, action) => {
-      const itemIndex = getItemIndex(state, action.payload.id);
-      if (itemIndex && itemIndex < 0) state.cartItems.push(action.payload);
-      else state.cartItems[itemIndex].quantity += action.payload.quantity;
-    },
-
-    removeFromCart: (state, action) => {
-      state.cartItems.filter((item) => item.id !== action.payload.id);
-    },
-
-    incrementQuantity: (state, action) => {
-      const itemIndex = getItemIndex(state, action.payload.id);
-      state.cartItems[itemIndex].quantity += 1;
-    },
-    decrementQuantity: (state, action) => {
-      const itemIndex = getItemIndex(state, action.payload.id);
-
-      if (state.cartItems[itemIndex].quantity > 1) {
-        state.cartItems[itemIndex].quantity -= 1;
+    addToCart: (state, { payload }) => {
+      const isExistItem = state.cartItems.find(
+        (item) => item.id === payload.id
+      );
+      if (!isExistItem) {
+        state.cartItems = [...state.cartItems, payload];
       } else {
-        return state.cartItems.filter((item) => item.id !== action.payload.id);
+        state.cartItems = state.cartItems.map((item) => {
+          if (item.id === payload.id) {
+            return { ...item, quantity: (item.quantity += payload.quantity) };
+          } else {
+            return item;
+          }
+        });
       }
+      state.totalAmount += payload.price;
     },
 
-    batchRemove: (state, action) =>
-      state.cartItems.filter((item) => !action.payload.ids.includes(item.id)),
+    removeFromCart: (state, { payload }) => {
+      state.cartItems = state.cartItems.filter(
+        (item) => item.id !== payload.id
+      );
+      state.totalAmount -= payload.price * payload.quantity;
+    },
 
-    toggleInclude: (state, action) => {
-      const itemIndex = getItemIndex(state, action.payload.id);
-      state.cartItems[itemIndex].includedInSum = !state.cartItems[itemIndex]
-        .includedInSum;
+    addItemQuantity: (state, { payload }) => {
+      state.cartItems = state.cartItems.map((item) => {
+        if (item.id === payload.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      });
+      state.totalAmount += payload.price;
+    },
+
+    subtractItemQuantity: (state, { payload }) => {
+      const subItem = state.cartItems.find((item) => item.id === payload.id);
+      if (subItem.quantity === 1) {
+        state.cartItems = state.cartItems.filter(
+          (item) => item.id !== subItem.id
+        );
+      } else {
+        subItem.quantity -= 1;
+      }
+      state.totalAmount -= subItem.price;
     },
   },
 });
@@ -55,10 +65,11 @@ const cartSlice = createSlice({
 export const {
   addToCart,
   removeFromCart,
-  incrementQuantity,
-  decrementQuantity,
-  batchRemove,
-  toggleInclude,
+  addItemQuantity,
+  subtractItemQuantity,
 } = cartSlice.actions;
+
+export const selectItems = (state) => state.cart.cartItems;
+export const selectAmount = (state) => state.cart.totalAmount;
 
 export default cartSlice.reducer;

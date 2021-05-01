@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -14,14 +14,10 @@ import {
   CardActions,
 } from '@material-ui/core';
 
-import {
-  RiShoppingCartLine,
-  RiHeartAddLine,
-  RiFileExcel2Fill,
-} from 'react-icons/ri';
+import { RiShoppingCartLine, RiHeartAddLine } from 'react-icons/ri';
 
 import { useDispatch } from 'react-redux';
-import cartReducer, { addToCart } from '../../redux/cartSlice';
+import { addToCart } from '../../redux/cartSlice';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -65,13 +61,20 @@ export default function ProductCard({ data }) {
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCard = () => {
-    const { id, name, price, image } = data;
-
-    const cartItem = {
-      id: data,
+    const {
+      id,
       name,
       price,
-      image,
+      mainImage: { url },
+      description: { value },
+    } = data;
+
+    const cartItem = {
+      id,
+      name,
+      price,
+      imageUrl: url,
+      description: value,
       quantity,
     };
     dispatch(addToCart(cartItem));

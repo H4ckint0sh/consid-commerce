@@ -1,6 +1,9 @@
+/* eslint-disable operator-linebreak */
 import { Drawer, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-// import { RiAddLine } from 'react-icons/ri';
+
+import { useSelector } from 'react-redux';
+import { selectItems, selectAmount } from '../../redux/cartSlice';
 import CartItemCard from './CartItemCard';
 
 const drawerWidth = 320;
@@ -41,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
 // eslint-disable-next-line react/prop-types
 const Cart = ({ open, handleCartOpen }) => {
   const classes = useStyles();
+  const cartItems = useSelector(selectItems);
+  const totalAmount = useSelector(selectAmount);
 
   return (
     <Drawer
@@ -56,7 +61,12 @@ const Cart = ({ open, handleCartOpen }) => {
       <Typography className={classes.title} variant="h5">
         Shopping Cart
       </Typography>
-      <CartItemCard />
+      {cartItems &&
+        cartItems.map((item) => <CartItemCard key={item.id} data={item} />)}
+      <Typography>
+        Total Amount:
+        {`${totalAmount} $`}
+      </Typography>
     </Drawer>
   );
 };

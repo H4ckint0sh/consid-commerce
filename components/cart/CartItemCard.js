@@ -1,12 +1,24 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable object-curly-newline */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
 
 import { RiAddLine, RiSubtractLine, RiDeleteBin7Line } from 'react-icons/ri';
+
+import { useDispatch } from 'react-redux';
+import {
+  removeFromCart,
+  addItemQuantity,
+  subtractItemQuantity,
+} from '../../redux/cartSlice';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -14,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: '10px',
   },
   root: {
     borderWidth: 0,
@@ -29,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   details: {
     display: 'flex',
+    flexGrow: '1',
     flexDirection: 'column',
   },
   content: {
@@ -37,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   cover: {
-    width: 150,
+    width: 100,
+    marginRight: '20px',
   },
   actions: {
     display: 'flex',
@@ -60,39 +75,54 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaControlCard() {
+export default function MediaControlCard({ data }) {
+  const { name, price, imageUrl, quantity } = data;
   const classes = useStyles();
-  // const theme = useTheme();ß
+  const dispatch = useDispatch();
 
   return (
     <div className={classes.container}>
       <Card className={classes.root}>
         <CardMedia
           className={classes.cover}
-          image="/static/images/cards/live-from-space.jpg"
+          image={imageUrl}
           title="Live from space album cover"
         />
         <div className={classes.details}>
           <CardContent className={classes.content}>
-            <Typography variant="button">Live From Space</Typography>
+            <Typography variant="button">{name}</Typography>
             <Typography variant="caption" color="textSecondary">
-              Mac Miller
+              description
             </Typography>
             <Typography variant="button" color="primary">
-              25$
+              {price}$
             </Typography>
           </CardContent>
           <div className={classes.actions}>
             <div className={classes.quantity}>
-              <IconButton size="small" aria-label="subtract">
+              <IconButton
+                onClick={() => dispatch(subtractItemQuantity(data))}
+                size="small"
+                aria-label="subtract"
+              >
                 <RiSubtractLine />
               </IconButton>
-              <Typography className={classes.quantityNumber}>3</Typography>
-              <IconButton size="small" aria-label="add">
+              <Typography className={classes.quantityNumber}>
+                {quantity}
+              </Typography>
+              <IconButton
+                onClick={() => dispatch(addItemQuantity(data))}
+                size="small"
+                aria-label="add"
+              >
                 <RiAddLine />
               </IconButton>
             </div>
-            <IconButton color="secondary" aria-label="delete">
+            <IconButton
+              onClick={() => dispatch(removeFromCart(data))}
+              color="secondary"
+              aria-label="delete"
+            >
               <RiDeleteBin7Line />
             </IconButton>
           </div>
