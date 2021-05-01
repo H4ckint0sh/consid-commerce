@@ -124,6 +124,9 @@ export default function Navbar() {
     window.onscroll = function () {
       headerClass();
     };
+    return () => {
+      setOnTop(false);
+    };
   }, [onTop, router.pathname]);
 
   return (

@@ -1,6 +1,8 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -17,6 +19,9 @@ import {
   RiHeartAddLine,
   RiFileExcel2Fill,
 } from 'react-icons/ri';
+
+import { useDispatch } from 'react-redux';
+import cartReducer, { addToCart } from '../../redux/cartSlice';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -56,6 +61,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProductCard({ data }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCard = () => {
+    const { id, name, price, image } = data;
+
+    const cartItem = {
+      id: data,
+      name,
+      price,
+      image,
+      quantity,
+    };
+    dispatch(addToCart(cartItem));
+  };
 
   return (
     <Card className={classes.card}>
@@ -71,7 +91,7 @@ export default function ProductCard({ data }) {
         <Typography color="primary">{data.price} $</Typography>
       </div>
       <div className={classes.actionsContainer}>
-        <IconButton color="primary">
+        <IconButton onClick={handleAddToCard} color="primary">
           <RiShoppingCartLine />
         </IconButton>
         <IconButton color="default">
