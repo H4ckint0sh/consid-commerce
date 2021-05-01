@@ -1,3 +1,7 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable comma-dangle */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable func-names */
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
@@ -90,13 +94,14 @@ const menuList = [
   },
 ];
 
-export default function Navbar() {
+export default function Navbar({ isErrorPage }) {
   const classes = useStyles();
   const router = useRouter();
-  // const theme = useTheme();
-  // const arrayPaths = ['/'];
+  const arrayPaths = ['/'];
 
-  const [onTop, setOnTop] = useState(false);
+  const [onTop, setOnTop] = useState(
+    !(!arrayPaths.includes(router.pathname) || isErrorPage)
+  );
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -117,17 +122,15 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    if (router.pathname !== '/') {
+    if (!arrayPaths.includes(router.pathname) || isErrorPage) {
       return;
     }
-    // eslint-disable-next-line func-names
+
+    headerClass();
     window.onscroll = function () {
       headerClass();
     };
-    return () => {
-      setOnTop(false);
-    };
-  }, [onTop, router.pathname]);
+  }, []);
 
   return (
     <div className={classes.root}>
