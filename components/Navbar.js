@@ -28,6 +28,9 @@ import {
 
 import Link from 'next/link';
 
+import { useSelector } from 'react-redux';
+import { selectTotalItems } from '../redux/cartSlice';
+
 import Sidebar from './Sidebar';
 import Cart from './cart/Cart';
 
@@ -98,6 +101,8 @@ export default function Navbar({ isErrorPage }) {
   const router = useRouter();
   const arrayPaths = ['/'];
 
+  const badgeNumber = useSelector(selectTotalItems);
+  console.log(badgeNumber);
   const [onTop, setOnTop] = useState(
     !(!arrayPaths.includes(router.pathname) || isErrorPage)
   );
@@ -173,7 +178,7 @@ export default function Navbar({ isErrorPage }) {
                 color="inherit"
                 aria-label="4 items in cart"
               >
-                <Badge badgeContent={1} color="primary">
+                <Badge badgeContent={badgeNumber} color="primary">
                   <RiShoppingCartLine color={!onTop ? 'inherit' : 'white'} />
                 </Badge>
               </IconButton>
