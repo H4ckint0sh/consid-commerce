@@ -102,7 +102,7 @@ export default function Navbar({ isErrorPage }) {
   const arrayPaths = ['/'];
 
   const badgeNumber = useSelector(selectTotalItems);
-  console.log(badgeNumber);
+
   const [onTop, setOnTop] = useState(
     !(!arrayPaths.includes(router.pathname) || isErrorPage)
   );

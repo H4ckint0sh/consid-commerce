@@ -155,8 +155,6 @@ const ColorGrid = () => {
     chipColorYellow,
     chipColorGreen,
     chipColorPurple,
-    chipColorBlue,
-    chipColorOrange,
     // 'orange'
   } = classes;
 
@@ -166,12 +164,16 @@ const ColorGrid = () => {
     chipColorYellow,
     chipColorGreen,
     chipColorPurple,
-    chipColorBlue,
-    chipColorOrange,
   ];
 
   return (
-    <Grid spacing={3} direction="row" container className={classes.root}>
+    <Grid
+      spacing={2}
+      direction="row"
+      wrap="wrap"
+      container
+      className={classes.root}
+    >
       {colors.map((color, index) => (
         <Grid key={index} item>
           <Chip component="div" className={color} />

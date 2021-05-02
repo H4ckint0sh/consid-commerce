@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import { RiAddLine, RiSubtractLine, RiDeleteBin7Line } from 'react-icons/ri';
+import { RiAddLine, RiSubtractLine, RiCloseCircleFill } from 'react-icons/ri';
 
 import { useDispatch } from 'react-redux';
 import {
@@ -123,7 +123,7 @@ export default function MediaControlCard({ data }) {
               color="secondary"
               aria-label="delete"
             >
-              <RiDeleteBin7Line />
+              <RiCloseCircleFill />
             </IconButton>
           </div>
         </div>

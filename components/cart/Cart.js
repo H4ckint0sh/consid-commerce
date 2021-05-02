@@ -1,6 +1,9 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable operator-linebreak */
-import { Button, Drawer, Typography } from '@material-ui/core';
+import { Button, Drawer, IconButton, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { RiMenuUnfoldLine } from 'react-icons/ri';
 
 import { useSelector } from 'react-redux';
 import { selectItems, selectAmount } from '../../redux/cartSlice';
@@ -35,9 +38,12 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  closeIcon: {
+    margin: '10px',
+  },
   title: {
     textAlign: 'center',
-    padding: theme.spacing(3),
+    padding: theme.spacing(0, 0, 3, 0),
   },
   chekout: {
     margin: theme.spacing(0, 2, 2, 2),
@@ -73,6 +79,9 @@ const Cart = ({ open, handleCartOpen }) => {
       onClose={() => handleCartOpen()}
     >
       <div className={classes.content}>
+        <IconButton onClick={handleCartOpen} className={classes.closeIcon}>
+          <RiMenuUnfoldLine color="black" />
+        </IconButton>
         <Typography className={classes.title} variant="h6">
           Shopping Cart
         </Typography>

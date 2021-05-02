@@ -1,12 +1,21 @@
 import {
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { RiAddLine } from 'react-icons/ri';
+import {
+  RiHomeSmile2Line,
+  RiShoppingBag2Line,
+  RiMenuFoldLine,
+  RiAddLine,
+} from 'react-icons/ri';
+
+import { useRouter } from 'next/router';
 
 const drawerWidth = 240;
 
@@ -37,16 +46,37 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-  toolbar: '100px',
+  toolbar: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  closeContainer: {
+    alignSelf: 'flex-end',
+  },
+  closeIcon: {
+    margin: '10px ',
+  },
+  title: {
+    margin: '5px 0px 20px 0',
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  icon: { fontSize: '25px' },
 }));
 
 // eslint-disable-next-line react/prop-types
 const Cart = ({ open, handleSidebarOpen }) => {
   const classes = useStyles();
+  const router = useRouter();
+
+  const handleClick = (href) => {
+    router.push(href);
+    handleSidebarOpen();
+  };
 
   return (
     <Drawer
@@ -57,14 +87,56 @@ const Cart = ({ open, handleSidebarOpen }) => {
       }}
       open={open}
       onClose={() => handleSidebarOpen()}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
     >
-      <div className={classes.toolbar} />
+      <div className={classes.toolbar}>
+        <div className={classes.closeContainer}>
+          <IconButton onClick={handleSidebarOpen} className={classes.closeIcon}>
+            <RiMenuFoldLine color="black" />
+          </IconButton>
+        </div>
+        <Typography className={classes.title} variant="h6">
+          Consid Commerce
+        </Typography>
+      </div>
       <List>
-        <ListItem button onClick={() => {}}>
+        <ListItem
+          button
+          selected={router.pathname === '/'}
+          onClick={() => {
+            handleClick('/');
+          }}
+        >
           <ListItemIcon>
-            <RiAddLine />
+            <RiHomeSmile2Line className={classes.icon} />
           </ListItemIcon>
-          <ListItemText primary="Create Post" />
+          <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem
+          button
+          selected={router.pathname === '/products'}
+          onClick={() => {
+            handleClick('/products');
+          }}
+        >
+          <ListItemIcon>
+            <RiShoppingBag2Line className={classes.icon} />
+          </ListItemIcon>
+          <ListItemText primary="Products" />
+        </ListItem>
+        <ListItem
+          button
+          selected={router.pathname === '/add'}
+          onClick={() => {
+            handleClick('/add');
+          }}
+        >
+          <ListItemIcon>
+            <RiAddLine className={classes.icon} />
+          </ListItemIcon>
+          <ListItemText primary="Add Product" />
         </ListItem>
       </List>
     </Drawer>
