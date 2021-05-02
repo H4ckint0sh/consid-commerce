@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable comma-dangle */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable func-names */
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -130,7 +129,7 @@ export default function Navbar({ isErrorPage }) {
     window.onscroll = function () {
       headerClass();
     };
-  }, []);
+  }, [arrayPaths, isErrorPage, router.pathname]);
 
   return (
     <div className={classes.root}>

@@ -1,5 +1,5 @@
 /* eslint-disable operator-linebreak */
-import { Drawer, Typography } from '@material-ui/core';
+import { Button, Drawer, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useSelector } from 'react-redux';
@@ -39,6 +39,19 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     padding: theme.spacing(3),
   },
+  chekout: {
+    margin: theme.spacing(0, 2, 2, 2),
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  content: {
+    flex: 1,
+  },
+  total: {
+    display: 'flex',
+  },
 }));
 
 // eslint-disable-next-line react/prop-types
@@ -58,15 +71,22 @@ const Cart = ({ open, handleCartOpen }) => {
       open={open}
       onClose={() => handleCartOpen()}
     >
-      <Typography className={classes.title} variant="h5">
-        Shopping Cart
-      </Typography>
-      {cartItems &&
-        cartItems.map((item) => <CartItemCard key={item.id} data={item} />)}
-      <Typography>
-        Total Amount:
-        {`${totalAmount} $`}
-      </Typography>
+      <div className={classes.content}>
+        <Typography className={classes.title} variant="h6">
+          Shopping Cart
+        </Typography>
+        {cartItems &&
+          cartItems.map((item) => <CartItemCard key={item.id} data={item} />)}
+      </div>
+      <div className={classes.chekout}>
+        <div className={classes.total}>
+          <Typography>Subtotal: </Typography>
+          <Typography variant="body1">{`${totalAmount} $`}</Typography>
+        </div>
+        <Button color="primary" variant="contained">
+          Chekout
+        </Button>
+      </div>
     </Drawer>
   );
 };
