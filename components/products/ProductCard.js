@@ -16,6 +16,8 @@ import {
 
 import { RiShoppingCartLine, RiHeartAddLine } from 'react-icons/ri';
 
+import Link from 'next/link';
+
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
 
@@ -60,7 +62,8 @@ export default function ProductCard({ data }) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
-  const handleAddToCard = () => {
+  const handleAddToCard = (e) => {
+    e.preventDefault();
     const {
       id,
       name,
@@ -81,26 +84,28 @@ export default function ProductCard({ data }) {
   };
 
   return (
-    <Card className={classes.card}>
-      <CardMedia
-        className={classes.media}
-        image={data.mainImage.url}
-        title={data.name}
-      />
-      <div className={classes.contentContainer}>
-        <Typography variant="h6" component="h6" className={classes.title}>
-          {data.name}
-        </Typography>
-        <Typography color="primary">{data.price} $</Typography>
-      </div>
-      <div className={classes.actionsContainer}>
-        <IconButton onClick={handleAddToCard} color="primary">
-          <RiShoppingCartLine />
-        </IconButton>
-        <IconButton color="default">
-          <RiHeartAddLine />
-        </IconButton>
-      </div>
-    </Card>
+    <Link href="/product/[id]" as={`/product/${data.id}`}>
+      <Card className={classes.card}>
+        <CardMedia
+          className={classes.media}
+          image={data.mainImage.url}
+          title={data.name}
+        />
+        <div className={classes.contentContainer}>
+          <Typography variant="h6" component="h6" className={classes.title}>
+            {data.name}
+          </Typography>
+          <Typography color="primary">{data.price} $</Typography>
+        </div>
+        <div className={classes.actionsContainer}>
+          <IconButton onClick={(e) => handleAddToCard(e)} color="primary">
+            <RiShoppingCartLine />
+          </IconButton>
+          <IconButton color="default">
+            <RiHeartAddLine />
+          </IconButton>
+        </div>
+      </Card>
+    </Link>
   );
 }

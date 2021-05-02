@@ -1,6 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { Container, Grid, useMediaQuery } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  useMediaQuery,
+  Collapse,
+  Hidden,
+  List,
+  ListItem,
+  ListItemText,
+} from '@material-ui/core';
+
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -38,7 +49,32 @@ const Products = ({ products }) => {
         container
         direction={isScreenSmall ? 'column' : 'row'}
       >
-        <Filters openFilters={openFilters} setOpenFilters={setOpenFilters} />
+        <Hidden mdDown>
+          <Grid md={3} item>
+            <Filters />
+          </Grid>
+        </Hidden>
+        <Hidden mdUp>
+          <List>
+            <ListItem
+              button
+              onClick={() => {
+                setOpenFilters(!openFilters);
+              }}
+              divider
+            >
+              <ListItemText primary="Filters" />
+              {openFilters ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={openFilters} timeout="auto">
+              <List component="div" disablePadding>
+                <ListItem>
+                  <Filters />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
+        </Hidden>
         <Grid
           sm={12}
           md={9}

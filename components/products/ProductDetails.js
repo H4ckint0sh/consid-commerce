@@ -3,11 +3,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prop-types */
 import { makeStyles } from '@material-ui/core/styles';
-import { StructuredText } from 'react-datocms';
-
-import { getProductById, allProducts } from '../../../lib/api';
-
-// import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -51,37 +46,21 @@ const Product = ({ product }) => {
         <div>
           <img className={classes.img} src={imageUrl} alt="main-img" />
         </div>
+
         <div className={classes.box}>
           <div className={classes.row}>
             <h2>{name}</h2>
             <span>$ {price}</span>
           </div>
-          <StructuredText data={description} />
+
+          <p>{description}</p>
+          {/* <p>{item.content}</p> */}
+
           <button className={classes.button}>Add to Cart </button>
         </div>
       </div>
     </div>
   );
 };
-
-export async function getStaticPaths() {
-  const products = await allProducts();
-  const paths = products.map((product) => ({
-    params: { id: product.id.toString() },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-  const { id } = params;
-  const product = await getProductById(id);
-
-  return {
-    props: {
-      product,
-    },
-  };
-}
 
 export default Product;
