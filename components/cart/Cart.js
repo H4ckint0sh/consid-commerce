@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectItems, selectAmount } from '../../redux/cartSlice';
 import CartItemCard from './CartItemCard';
 
-const drawerWidth = 320;
+const drawerWidth = 310;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   total: {
     display: 'flex',
+    alignItems: 'center',
   },
 }));
 
@@ -81,7 +82,7 @@ const Cart = ({ open, handleCartOpen }) => {
       <div className={classes.chekout}>
         <div className={classes.total}>
           <Typography>Subtotal: </Typography>
-          <Typography variant="body1">{`${totalAmount} $`}</Typography>
+          <Typography variant="h6">{`${totalAmount} $`}</Typography>
         </div>
         <Button color="primary" variant="contained">
           Chekout
