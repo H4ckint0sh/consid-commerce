@@ -49,7 +49,7 @@ const Products = ({ products }) => {
         container
         direction={isScreenSmall ? 'column' : 'row'}
       >
-        <Hidden mdDown>
+        <Hidden smDown>
           <Grid md={3} item>
             <Filters />
           </Grid>
