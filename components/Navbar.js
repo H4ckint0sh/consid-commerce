@@ -91,8 +91,12 @@ const menuList = [
     href: '/products',
   },
   {
-    name: 'Add Product',
-    href: '/add',
+    name: 'About Us',
+    href: '/about',
+  },
+  {
+    name: 'Contact Us',
+    href: '/contact',
   },
 ];
 
