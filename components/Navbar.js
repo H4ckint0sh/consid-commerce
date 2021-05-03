@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 36,
   },
   listContainer: {
-    width: '300px',
+    width: '500px',
     marginLeft: 'auto',
     display: 'flex',
     flexDirection: 'row',
@@ -91,11 +91,11 @@ const menuList = [
     href: '/products',
   },
   {
-    name: 'About Us',
+    name: 'About',
     href: '/about',
   },
   {
-    name: 'Contact Us',
+    name: 'Contact',
     href: '/contact',
   },
 ];
