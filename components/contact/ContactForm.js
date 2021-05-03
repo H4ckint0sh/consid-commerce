@@ -29,7 +29,7 @@ const ContactUsForm = () => {
               <TextField
                 id="outlined-basic-firstname"
                 size="small"
-                label="Outlined"
+                label="First Name"
                 variant="outlined"
                 fullWidth
               />
@@ -39,7 +39,7 @@ const ContactUsForm = () => {
               <TextField
                 id="outlined-basic-lastname"
                 size="small"
-                label="Outlined"
+                label="Last Name"
                 variant="outlined"
                 fullWidth
               />
@@ -49,7 +49,7 @@ const ContactUsForm = () => {
               <TextField
                 id="outlined-basic-email"
                 size="small"
-                label="Outlined"
+                label="Email"
                 variant="outlined"
                 fullWidth
               />
