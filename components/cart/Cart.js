@@ -96,7 +96,12 @@ const Cart = ({ open, handleCartOpen }) => {
           <Typography variant="h6">{`${totalAmount} $`}</Typography>
         </div>
         <Link href="/checkout">
-          <Button color="primary" disabled={!totalAmount} variant="contained">
+          <Button
+            color="primary"
+            disabled={!totalAmount}
+            onClick={handleCartOpen}
+            variant="contained"
+          >
             Chekout
           </Button>
         </Link>
