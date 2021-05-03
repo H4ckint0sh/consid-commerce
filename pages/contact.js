@@ -7,12 +7,14 @@ import { getPageByName } from '../lib/api';
 
 import ContactusForm from '../components/contact/ContactForm';
 import Banner from '../components/contact/Banner';
+import Meta from '../components/Meta';
 
 const ContactUs = ({ aboutPage }) => {
-  const { title, slug, content, mainImage } = aboutPage;
+  const { title, slug, content, mainImage, seo } = aboutPage;
 
   return (
     <>
+      <Meta title={seo.title} description={seo.description} />
       <Banner title={title} slug={slug} url={mainImage.url} />
       <br />
       <br />

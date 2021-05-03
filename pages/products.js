@@ -15,9 +15,10 @@ import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import { allProducts } from '../lib/api';
+import { allProducts, getPageByName } from '../lib/api';
 import ProductsSection from '../components/products/ProductsSection';
 import Filters from '../components/products/Filter';
+import Meta from '../components/Meta';
 
 const productStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,7 @@ const productStyles = makeStyles((theme) => ({
   },
 }));
 
-const Products = ({ products }) => {
+const Products = ({ products, productPage }) => {
   const classes = productStyles();
   const theme = useTheme();
   const [openFilters, setOpenFilters] = useState(false);
@@ -44,6 +45,10 @@ const Products = ({ products }) => {
 
   return (
     <Container maxWidth="lg">
+      <Meta
+        title={productPage.seo.title}
+        description={productPage.seo.description}
+      />
       <Grid
         className={classes.root}
         container
@@ -92,10 +97,13 @@ const Products = ({ products }) => {
 };
 
 export async function getStaticProps() {
+  const pageName = 'Products';
+  const productPage = await getPageByName(pageName);
   const products = await allProducts();
 
   return {
     props: {
+      productPage,
       products,
     },
   };
