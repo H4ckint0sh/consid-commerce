@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { RiMenuUnfoldLine } from 'react-icons/ri';
 
+import Link from 'next/link';
+
 import { useSelector } from 'react-redux';
 import { selectItems, selectAmount } from '../../redux/cartSlice';
 import CartItemCard from './CartItemCard';
@@ -93,9 +95,11 @@ const Cart = ({ open, handleCartOpen }) => {
           <Typography>Subtotal: </Typography>
           <Typography variant="h6">{`${totalAmount} $`}</Typography>
         </div>
-        <Button color="primary" variant="contained">
-          Chekout
-        </Button>
+        <Link href="/checkout">
+          <Button color="primary" disabled={!totalAmount} variant="contained">
+            Chekout
+          </Button>
+        </Link>
       </div>
     </Drawer>
   );
