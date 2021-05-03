@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable operator-linebreak */
 /* eslint-disable react/prop-types */
 /* eslint-disable comma-dangle */
 /* eslint-disable func-names */
@@ -103,7 +105,7 @@ const menuList = [
 export default function Navbar() {
   const classes = useStyles();
   const router = useRouter();
-  const arrayPaths = ['/'];
+  const arrayPaths = ['/', '/about', '/contact'];
 
   const badgeNumber = useSelector(selectTotalItems);
 
@@ -129,6 +131,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!arrayPaths.includes(router.pathname)) {
+      setOnTop(false);
       return;
     }
     headerClass();
@@ -147,7 +150,7 @@ export default function Navbar() {
       <AppBar
         position="fixed"
         elevation={0}
-        color={onTop || router.pathname !== '/' ? 'transparent' : 'inherit'}
+        color={onTop ? 'transparent' : 'inherit'}
         className={classes.appBar}
       >
         <Container maxWidth="lg">
@@ -157,17 +160,14 @@ export default function Navbar() {
               aria-label="menu"
               onClick={(e) => handleSidebarOpen()}
             >
-              <RiMenu2Line
-                color={!onTop || router.pathname !== '/' ? 'black' : 'white'}
-              />
+              <RiMenu2Line color={!onTop ? 'black' : 'white'} />
             </IconButton>
             <Hidden smDown>
               <div className={classes.listContainer}>
                 {menuList.map((el) => (
                   <div
                     style={{
-                      color:
-                        onTop && router.pathname === '/' ? 'white' : 'black',
+                      color: onTop ? 'white' : 'black',
                       fontSize: '18px',
                     }}
                     key={el.name}
@@ -187,11 +187,7 @@ export default function Navbar() {
                 aria-label="4 items in cart"
               >
                 <Badge badgeContent={badgeNumber} color="primary">
-                  <RiShoppingCartLine
-                    color={
-                      !onTop || router.pathname !== '/' ? 'inherit' : 'white'
-                    }
-                  />
+                  <RiShoppingCartLine color={!onTop ? 'inherit' : 'white'} />
                 </Badge>
               </IconButton>
               <IconButton
@@ -200,11 +196,7 @@ export default function Navbar() {
                 aria-haspopup="true"
                 color="inherit"
               >
-                <RiLoginBoxLine
-                  color={
-                    !onTop || router.pathname !== '/' ? 'inherit' : 'white'
-                  }
-                />
+                <RiLoginBoxLine color={!onTop ? 'inherit' : 'white'} />
               </IconButton>
             </div>
           </Toolbar>

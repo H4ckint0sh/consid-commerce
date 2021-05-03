@@ -17,7 +17,7 @@ const ContactUs = ({ aboutPage }) => {
       <br />
       <Container>
         <Grid container item justify="center">
-          <Grid item xs={11}>
+          <Grid item xs={10} style={{}}>
             <StructuredText data={content} />
           </Grid>
         </Grid>
