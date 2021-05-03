@@ -10,9 +10,10 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import {
   RiHomeSmile2Line,
-  RiShoppingBag2Line,
+  RiStore2Line,
   RiMenuFoldLine,
-  RiAddLine,
+  RiMailSendLine,
+  RiBuilding4Line,
 } from 'react-icons/ri';
 
 import { useRouter } from 'next/router';
@@ -122,21 +123,33 @@ const Cart = ({ open, handleSidebarOpen }) => {
           }}
         >
           <ListItemIcon>
-            <RiShoppingBag2Line className={classes.icon} />
+            <RiStore2Line className={classes.icon} />
           </ListItemIcon>
           <ListItemText primary="Products" />
         </ListItem>
         <ListItem
           button
-          selected={router.pathname === '/add'}
+          selected={router.pathname === '/about'}
           onClick={() => {
-            handleClick('/add');
+            handleClick('/about');
           }}
         >
           <ListItemIcon>
-            <RiAddLine className={classes.icon} />
+            <RiBuilding4Line className={classes.icon} />
           </ListItemIcon>
-          <ListItemText primary="Add Product" />
+          <ListItemText primary="About" />
+        </ListItem>
+        <ListItem
+          button
+          selected={router.pathname === '/contact'}
+          onClick={() => {
+            handleClick('/contact');
+          }}
+        >
+          <ListItemIcon>
+            <RiMailSendLine className={classes.icon} />
+          </ListItemIcon>
+          <ListItemText primary="Contact" />
         </ListItem>
       </List>
     </Drawer>

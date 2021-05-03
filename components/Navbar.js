@@ -107,7 +107,7 @@ export default function Navbar() {
 
   const badgeNumber = useSelector(selectTotalItems);
 
-  const [onTop, setOnTop] = useState(!!arrayPaths.includes(router.pathname));
+  const [onTop, setOnTop] = useState(!arrayPaths.includes(router.pathname));
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
