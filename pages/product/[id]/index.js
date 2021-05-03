@@ -18,8 +18,11 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { StructuredText } from 'react-datocms';
 
 import Link from 'next/link';
+
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartSlice';
+
+import Meta from '../../../components/Meta';
 
 import { getProductById, allProducts } from '../../../lib/api';
 
@@ -103,45 +106,48 @@ const Product = ({ product }) => {
   };
 
   return (
-    <Container className={classes.container} maxWidth="lg">
-      <Card elevation={0} className={classes.root}>
-        <CardMedia className={classes.cover} image={mainImage.url} />
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <div className={classes.row}>
-              <Typography component="h5" variant="h5">
-                {name}
-              </Typography>
-              <Typography component="h5" color="primary" variant="h5">
-                $ {price}
-              </Typography>
-            </div>
-            <StructuredText data={description} />
-          </CardContent>
-          <div className={classes.controls}>
-            <Button
-              className={classes.addButton}
-              size={isScreenSmall ? 'small' : 'medium'}
-              variant="contained"
-              color="primary"
-              onClick={() => handleAddToCard()}
-            >
-              Add to cart
-            </Button>
-            <Link href="/products">
+    <>
+      <Meta title={name} />
+      <Container className={classes.container} maxWidth="lg">
+        <Card elevation={0} className={classes.root}>
+          <CardMedia className={classes.cover} image={mainImage.url} />
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <div className={classes.row}>
+                <Typography component="h5" variant="h5">
+                  {name}
+                </Typography>
+                <Typography component="h5" color="primary" variant="h5">
+                  $ {price}
+                </Typography>
+              </div>
+              <StructuredText data={description} />
+            </CardContent>
+            <div className={classes.controls}>
               <Button
+                className={classes.addButton}
                 size={isScreenSmall ? 'small' : 'medium'}
-                variant="outlined"
+                variant="contained"
                 color="primary"
                 onClick={() => handleAddToCard()}
               >
-                back to products
+                Add to cart
               </Button>
-            </Link>
+              <Link href="/products">
+                <Button
+                  size={isScreenSmall ? 'small' : 'medium'}
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => handleAddToCard()}
+                >
+                  back to products
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </Card>
-    </Container>
+        </Card>
+      </Container>
+    </>
   );
 };
 
