@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 36,
   },
   listContainer: {
-    width: '500px',
+    width: '300px',
     marginLeft: 'auto',
     display: 'flex',
     flexDirection: 'row',
@@ -100,16 +100,14 @@ const menuList = [
   },
 ];
 
-export default function Navbar({ isErrorPage }) {
+export default function Navbar() {
   const classes = useStyles();
   const router = useRouter();
   const arrayPaths = ['/'];
 
   const badgeNumber = useSelector(selectTotalItems);
 
-  const [onTop, setOnTop] = useState(
-    !(!arrayPaths.includes(router.pathname) || isErrorPage)
-  );
+  const [onTop, setOnTop] = useState(!!arrayPaths.includes(router.pathname));
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -130,15 +128,18 @@ export default function Navbar({ isErrorPage }) {
   };
 
   useEffect(() => {
-    if (!arrayPaths.includes(router.pathname) || isErrorPage) {
+    if (!arrayPaths.includes(router.pathname)) {
       return;
     }
-
     headerClass();
     window.onscroll = function () {
       headerClass();
     };
-  }, [arrayPaths, isErrorPage, router.pathname]);
+
+    return () => {
+      setOnTop(false);
+    };
+  });
 
   return (
     <div className={classes.root}>
@@ -146,7 +147,7 @@ export default function Navbar({ isErrorPage }) {
       <AppBar
         position="fixed"
         elevation={0}
-        color={onTop ? 'transparent' : 'inherit'}
+        color={onTop || router.pathname !== '/' ? 'transparent' : 'inherit'}
         className={classes.appBar}
       >
         <Container maxWidth="lg">
@@ -156,14 +157,17 @@ export default function Navbar({ isErrorPage }) {
               aria-label="menu"
               onClick={(e) => handleSidebarOpen()}
             >
-              <RiMenu2Line color={!onTop || sidebarOpen ? 'black' : 'white'} />
+              <RiMenu2Line
+                color={!onTop || router.pathname !== '/' ? 'black' : 'white'}
+              />
             </IconButton>
             <Hidden smDown>
               <div className={classes.listContainer}>
                 {menuList.map((el) => (
                   <div
                     style={{
-                      color: onTop ? 'white' : 'black',
+                      color:
+                        onTop && router.pathname === '/' ? 'white' : 'black',
                       fontSize: '18px',
                     }}
                     key={el.name}
@@ -183,7 +187,11 @@ export default function Navbar({ isErrorPage }) {
                 aria-label="4 items in cart"
               >
                 <Badge badgeContent={badgeNumber} color="primary">
-                  <RiShoppingCartLine color={!onTop ? 'inherit' : 'white'} />
+                  <RiShoppingCartLine
+                    color={
+                      !onTop || router.pathname !== '/' ? 'inherit' : 'white'
+                    }
+                  />
                 </Badge>
               </IconButton>
               <IconButton
@@ -192,7 +200,11 @@ export default function Navbar({ isErrorPage }) {
                 aria-haspopup="true"
                 color="inherit"
               >
-                <RiLoginBoxLine color={!onTop ? 'inherit' : 'white'} />
+                <RiLoginBoxLine
+                  color={
+                    !onTop || router.pathname !== '/' ? 'inherit' : 'white'
+                  }
+                />
               </IconButton>
             </div>
           </Toolbar>
