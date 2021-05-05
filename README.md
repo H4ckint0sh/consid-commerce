@@ -2,4 +2,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Consid Commerse
 
-Demo: https://vercel.com/h4ckint0sh/consid-commerce
+Demo: https://consid-commerce.vercel.app/
