@@ -1,0 +1,23 @@
+{
+  "short_name": "Consid Commers",
+  "name": "Official Consid Commers",
+  "icons": [
+    {
+      "src": "/consid-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/consid-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#2A2520",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "orientation": "portrait"
+}
