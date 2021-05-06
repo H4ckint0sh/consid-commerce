@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unreachable */
 /* eslint-disable no-fallthrough */
