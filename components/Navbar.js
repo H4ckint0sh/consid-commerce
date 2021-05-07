@@ -153,7 +153,7 @@ export default function Navbar() {
         color={onTop ? 'transparent' : 'inherit'}
         className={classes.appBar}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <Toolbar className={classes.toolbar}>
             <IconButton
               edge="start"
