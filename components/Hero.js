@@ -1,13 +1,8 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-one-expression-per-line */
-import {
-  Button,
-  Grid,
-  Hidden,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
+import { Button, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import Link from 'next/link';
@@ -57,25 +52,25 @@ const Hero = ({ img, title }) => {
           backgroundImage: `url(${img})`,
         }}
       >
-        <Grid style={{ height: '100%' }} justify="center" container>
-          <Hidden mdDown>
-            <Grid item xs={8} />
-          </Hidden>
+        <Grid
+          style={{ height: '80%', paddingTop: '200px' }}
+          justify="center"
+          container
+        >
           <Grid
             container
             item
             alignItems="center"
-            justify={isScreenMedium ? 'center' : 'flex-start'}
+            justify="center"
             xs={isScreenMedium ? 8 : 4}
           >
             <Grid>
               <Typography
                 className={classes.primaryTitle}
                 display="inline"
+                style={{ backgroundColor: 'white' }}
                 variant="h2"
               >
-                {/* Use Consid Commers{' '}
-                <span className={classes.span}>Buy Smart</span> */}
                 {title}
               </Typography>
               <br />
