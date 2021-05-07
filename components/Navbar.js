@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 50,
   },
   listContainer: {
     width: '300px',
@@ -184,7 +184,7 @@ export default function Navbar() {
               <IconButton
                 onClick={(e) => handleCartOpen()}
                 color="inherit"
-                aria-label="4 items in cart"
+                aria-label="items in cart"
               >
                 <Badge badgeContent={badgeNumber} color="primary">
                   <RiShoppingCartLine color={!onTop ? 'inherit' : 'white'} />

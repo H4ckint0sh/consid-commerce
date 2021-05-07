@@ -1,3 +1,6 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable comma-dangle */
 /* eslint-disable spaced-comment */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unreachable */
