@@ -1,7 +1,7 @@
 import {
   RiPlaneLine,
   RiHeadphoneFill,
-  RiAlarmFill,
+  RiMoneyDollarCircleFill,
   RiShip2Fill,
 } from 'react-icons/ri';
 
@@ -17,7 +17,7 @@ const Data = [
     details: 'Online consultations',
   },
   {
-    icon: <RiAlarmFill className="Datalisticons" />,
+    icon: <RiMoneyDollarCircleFill className="Datalisticons" />,
     title: '30-days return',
     details: 'Moneyback guarantee',
   },
