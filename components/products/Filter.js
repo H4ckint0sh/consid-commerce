@@ -20,6 +20,7 @@ import Prices from './Prices';
 const useStyles = makeStyles({
   root: {
     margin: 0,
+    width: '100%',
   },
   chipColorBlack: {
     backgroundColor: 'black',
@@ -68,7 +69,7 @@ const Filter = () => {
   const [openColor, setOpenColor] = useState(false);
 
   return (
-    <Grid sx={10} item>
+    <Grid style={{ width: '100%' }} sx={10} item>
       <List>
         <ListItem divider dense>
           <List dense>

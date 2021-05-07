@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   toolbar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       height: '100px',
     },
   },
