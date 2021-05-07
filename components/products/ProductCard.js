@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   card: {
     minWidth: 210,
     maxWidth: 210,
+    [theme.breakpoints.down('sm')]: {
+      minWidth: 140,
+      maxWidth: 140,
+    },
     position: 'relative',
     transform: 'scale(.95)',
     transition: 'box-shadow 1s, transform .5s',
@@ -37,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
   media: {
     width: '100%',
     height: 210,
+    [theme.breakpoints.down('sm')]: {
+      height: 100,
+    },
     backgroundSize: 'contain',
   },
   title: {
@@ -47,12 +54,18 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     padding: 0,
     margin: '10px 20px 0 20px',
+    [theme.breakpoints.down('sm')]: {
+      margin: '5px',
+    },
     justifyContent: 'space-between',
   },
   actionsContainer: {
     display: 'flex',
     padding: 0,
     margin: '0 10px 10px 10px',
+    [theme.breakpoints.down('sm')]: {
+      margin: '0',
+    },
     justifyContent: 'space-between',
   },
 }));
