@@ -39,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    width: '100%',
+    width: '80%',
     height: 210,
+    margin: '0 auto',
     [theme.breakpoints.down('sm')]: {
       height: 100,
     },
