@@ -9,13 +9,11 @@ import Link from 'next/link';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    backgroundColor: theme.palette.common.white,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       height: '100px',
       marginTop: '100px',
     },
-    color: 'white',
     borderRadius: 0,
     padding: theme.spacing(2, 0),
     display: 'flex',
@@ -31,9 +29,7 @@ const Footer = () => {
         <Container>
           <Grid container justify="center" alignItems="center">
             <Link href="/">
-              <span style={{ color: '#000' }}>
-                &copy; {new Date().getFullYear()} Consid Commerce
-              </span>
+              <span>&copy; {new Date().getFullYear()} Consid Commerce</span>
             </Link>
           </Grid>
         </Container>

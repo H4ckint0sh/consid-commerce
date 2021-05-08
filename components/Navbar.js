@@ -25,7 +25,8 @@ import {
 import {
   RiMenu2Line,
   RiShoppingCartLine,
-  RiLoginBoxLine,
+  RiSunLine,
+  RiMoonLine,
 } from 'react-icons/ri';
 
 import Link from 'next/link';
@@ -164,14 +165,14 @@ export default function Navbar() {
               aria-label="menu"
               onClick={(e) => handleSidebarOpen()}
             >
-              <RiMenu2Line color={!onTop ? 'black' : 'white'} />
+              <RiMenu2Line color={!onTop ? 'inherit' : 'white'} />
             </IconButton>
             <Hidden smDown>
               <div className={classes.listContainer}>
                 {menuList.map((el) => (
                   <div
                     style={{
-                      color: onTop ? 'white' : 'black',
+                      color: onTop ? 'white' : 'inherit',
                       fontSize: '18px',
                     }}
                     key={el.name}
@@ -201,7 +202,11 @@ export default function Navbar() {
                 color="inherit"
                 onClick={() => dispatch(toggleDarkMode(!darkMode))}
               >
-                <RiLoginBoxLine color={!onTop ? 'inherit' : 'white'} />
+                {darkMode ? (
+                  <RiSunLine color={!onTop ? 'inherit' : 'white'} />
+                ) : (
+                  <RiMoonLine color={!onTop ? 'inherit' : 'white'} />
+                )}
               </IconButton>
             </div>
           </Toolbar>
