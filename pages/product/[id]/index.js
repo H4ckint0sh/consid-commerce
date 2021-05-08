@@ -28,10 +28,10 @@ import { getProductById, allProducts } from '../../../lib/api';
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.down('sm')]: {
-      margin: '150 auto',
+      margin: '100px auto',
     },
     [theme.breakpoints.up('sm')]: {
-      margin: '150px auto',
+      margin: '200px auto',
     },
   },
   row: {
@@ -89,10 +89,7 @@ const Product = ({ product }) => {
         spacing={3}
       >
         <Grid container item alignItems="center" xs={12} sm={12} md={4}>
-          <Image
-            width={isScreenMedium ? '50%' : '100%'}
-            data={mainImage.responsiveImage}
-          />
+          <Image width="100%" data={mainImage.responsiveImage} />
         </Grid>
         <Grid container alignItems="center" item xs={12} sm={12} md={8}>
           <div className={classes.row}>
