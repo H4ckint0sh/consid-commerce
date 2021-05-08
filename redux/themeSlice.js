@@ -7,8 +7,8 @@ export const themeSlice = createSlice({
     darkMode: true,
   },
   reducers: {
-    toggleDarkMode: (state, action) => {
-      state.darkMode = action.payload;
+    toggleDarkMode: (state, { payload }) => {
+      state.darkMode = payload;
     },
   },
 });
