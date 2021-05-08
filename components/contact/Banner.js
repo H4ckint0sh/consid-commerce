@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const Banner = ({ title, slug, url }) => {
   const useStyles = makeStyles(() => ({
     contactUsBanner: {
-      height: '400px',
+      height: '500px',
       backgroundColor: 'aqua',
       color: 'white',
       display: 'flex',

@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   primaryTitle: {
     color: theme.palette.primary.main,
+    backgroundColor: theme.palette.type === 'light' ? '#fff' : '#303030',
     fontWeight: 'bold',
     [theme.breakpoints.down('md')]: {
       fontSize: '40px',
@@ -68,8 +69,7 @@ const Hero = ({ img, title }) => {
               <Typography
                 className={classes.primaryTitle}
                 display="inline"
-                style={{ backgroundColor: 'white' }}
-                variant="h2"
+                variant="h3"
               >
                 {title}
               </Typography>

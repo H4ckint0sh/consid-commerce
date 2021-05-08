@@ -18,9 +18,9 @@ const ContactUs = ({ aboutPage }) => {
       <Banner title={title} slug={slug} url={mainImage.url} />
       <br />
       <br />
-      <Container>
+      <Container maxWidth="md">
         <Grid container item justify="center">
-          <Grid item xs={12} style={{ margin: '0 30px 30px 25px' }}>
+          <Grid item xs={12}>
             <StructuredText data={content} />
           </Grid>
           <Grid item xs={12}>
