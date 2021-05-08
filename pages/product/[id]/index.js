@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable object-curly-newline */
@@ -6,16 +7,14 @@
 import { useState } from 'react';
 import {
   Button,
-  Card,
-  CardContent,
-  CardMedia,
   Container,
+  Grid,
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import { StructuredText } from 'react-datocms';
+import { StructuredText, Image } from 'react-datocms';
 
 import Link from 'next/link';
 
@@ -29,59 +28,33 @@ import { getProductById, allProducts } from '../../../lib/api';
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.down('sm')]: {
-      margin: '0 auto',
+      margin: '150 auto',
     },
     [theme.breakpoints.up('sm')]: {
       margin: '150px auto',
     },
   },
-  root: {
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-    },
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-    },
-    minHeight: 500,
-    justifyContent: 'space-around',
-  },
-  details: {
-    flex: 0.8,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-  },
   row: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
-  cover: {
-    [theme.breakpoints.up('sm')]: {
-      width: 400,
-      objectFit: 'contain',
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: 200,
-      margin: '0 auto',
-      objectFit: 'cover',
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: '100%',
-      height: 300,
+  name: {
+    marginRight: '50px',
+  },
+  description: {
+    [theme.breakpoints.up('md')]: {
+      paddingRight: '100px',
     },
   },
   controls: {
     display: 'flex',
     alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    [theme.breakpoints.up('md')]: {
+      paddingRight: '100px',
+    },
   },
   addButton: {
-    marginRight: '30px',
+    marginRight: '50px',
   },
 }));
 
@@ -91,7 +64,7 @@ const Product = ({ product }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const isScreenSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  const isScreenMedium = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleAddToCard = () => {
     const cartItem = {
@@ -106,48 +79,57 @@ const Product = ({ product }) => {
   };
 
   return (
-    <>
+    <Container maxWidth="lg">
       <Meta title={name} />
-      <Container className={classes.container} maxWidth="lg">
-        <Card elevation={0} className={classes.root}>
-          <CardMedia className={classes.cover} image={mainImage.url} />
-          <div className={classes.details}>
-            <CardContent className={classes.content}>
-              <div className={classes.row}>
-                <Typography component="h5" variant="h5">
-                  {name}
-                </Typography>
-                <Typography component="h5" color="primary" variant="h5">
-                  $ {price}
-                </Typography>
-              </div>
-              <StructuredText data={description} />
-            </CardContent>
-            <div className={classes.controls}>
+      <Grid
+        className={classes.container}
+        container
+        direction={isScreenMedium ? 'column' : 'row'}
+        justify="center"
+        spacing={3}
+      >
+        <Grid container item alignItems="center" xs={12} sm={12} md={4}>
+          <Image
+            width={isScreenMedium ? '50%' : '100%'}
+            data={mainImage.responsiveImage}
+          />
+        </Grid>
+        <Grid container alignItems="center" item xs={12} sm={12} md={8}>
+          <div className={classes.row}>
+            <Typography className={classes.name} component="h5" variant="h5">
+              {name}
+            </Typography>
+            <Typography component="h5" color="primary" variant="h5">
+              ${price}
+            </Typography>
+          </div>
+          <div className={classes.description}>
+            <StructuredText data={description} />
+          </div>
+          <div className={classes.controls}>
+            <Button
+              className={classes.addButton}
+              size={isScreenMedium ? 'small' : 'medium'}
+              variant="contained"
+              color="primary"
+              onClick={() => handleAddToCard()}
+            >
+              Add to cart
+            </Button>
+            <Link href="/products">
               <Button
-                className={classes.addButton}
-                size={isScreenSmall ? 'small' : 'medium'}
-                variant="contained"
+                size={isScreenMedium ? 'small' : 'medium'}
+                variant="outlined"
                 color="primary"
                 onClick={() => handleAddToCard()}
               >
-                Add to cart
+                back to products
               </Button>
-              <Link href="/products">
-                <Button
-                  size={isScreenSmall ? 'small' : 'medium'}
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => handleAddToCard()}
-                >
-                  back to products
-                </Button>
-              </Link>
-            </div>
+            </Link>
           </div>
-        </Card>
-      </Container>
-    </>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
