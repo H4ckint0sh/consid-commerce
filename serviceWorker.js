@@ -8,7 +8,6 @@
 import { skipWaiting, clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import {
-  NetworkOnly,
   NetworkFirst,
   CacheFirst,
   StaleWhileRevalidate,
@@ -83,7 +82,7 @@ registerRoute(
 // disable image cache, so we could observe the placeholder image when offline
 registerRoute(
   /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
-  new NetworkOnly({
+  new CacheFirst({
     cacheName: 'static-image-assets',
     plugins: [
       new ExpirationPlugin({
