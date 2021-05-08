@@ -40,12 +40,16 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     width: '80%',
-    height: 210,
+    height: 190,
     margin: '0 auto',
     [theme.breakpoints.down('sm')]: {
       height: 100,
     },
     backgroundSize: 'contain',
+    '&img': {
+      width: '80%',
+      height: '80%',
+    },
   },
   title: {
     fontWeight: 'bold',
