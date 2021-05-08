@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 import { useEffect } from 'react';
-import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
+
+import Head from 'next/head';
 
 import '../styles/globals.css';
 
@@ -12,7 +13,7 @@ import { Provider } from 'react-redux';
 import store from '../redux/store';
 
 import Layout from '../components/Layout';
-import theme from '../config/theme';
+import ThemeWrapper from '../theme/ThemeWrapper';
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -35,13 +36,13 @@ export default function MyApp(props) {
         />
       </Head>
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
+        <ThemeWrapper>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </ThemeProvider>
+        </ThemeWrapper>
       </Provider>
     </>
   );

@@ -30,8 +30,9 @@ import {
 
 import Link from 'next/link';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectTotalItems } from '../redux/cartSlice';
+import { selectDarkMode, toggleDarkMode } from '../redux/themeSlice';
 
 import Sidebar from './Sidebar';
 import Cart from './cart/Cart';
@@ -105,9 +106,12 @@ const menuList = [
 export default function Navbar() {
   const classes = useStyles();
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const arrayPaths = ['/', '/about', '/contact'];
 
   const badgeNumber = useSelector(selectTotalItems);
+  const darkMode = useSelector(selectDarkMode);
 
   const [onTop, setOnTop] = useState(!arrayPaths.includes(router.pathname));
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -195,6 +199,7 @@ export default function Navbar() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 color="inherit"
+                onClick={() => dispatch(toggleDarkMode(!darkMode))}
               >
                 <RiLoginBoxLine color={!onTop ? 'inherit' : 'white'} />
               </IconButton>
