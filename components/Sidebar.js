@@ -95,7 +95,7 @@ const Cart = ({ open, handleSidebarOpen }) => {
       <div className={classes.toolbar}>
         <div className={classes.closeContainer}>
           <IconButton onClick={handleSidebarOpen} className={classes.closeIcon}>
-            <RiMenuFoldLine color="black" />
+            <RiMenuFoldLine color="inherit" />
           </IconButton>
         </div>
         <Typography className={classes.title} variant="h6">

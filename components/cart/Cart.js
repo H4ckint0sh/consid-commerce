@@ -82,7 +82,7 @@ const Cart = ({ open, handleCartOpen }) => {
     >
       <div className={classes.content}>
         <IconButton onClick={handleCartOpen} className={classes.closeIcon}>
-          <RiMenuUnfoldLine color="black" />
+          <RiMenuUnfoldLine color="inherit" />
         </IconButton>
         <Typography className={classes.title} variant="h6">
           Shopping Cart
