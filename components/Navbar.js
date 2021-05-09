@@ -37,6 +37,7 @@ import { selectDarkMode, toggleDarkMode } from '../redux/themeSlice';
 
 import Sidebar from './Sidebar';
 import Cart from './cart/Cart';
+import ThemeSwitch from './CustomizedSwitch';
 
 const drawerWidth = 240;
 
@@ -81,6 +82,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '50px',
   },
   iconsContainer: {
+    display: 'flex',
+    alignItems: ' center',
     marginLeft: 'auto',
   },
 }));
@@ -149,6 +152,10 @@ export default function Navbar() {
     };
   });
 
+  const switchDarkLight = () => {
+    dispatch(toggleDarkMode(!darkMode));
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -195,7 +202,8 @@ export default function Navbar() {
                   <RiShoppingCartLine color={!onTop ? 'inherit' : 'white'} />
                 </Badge>
               </IconButton>
-              <IconButton
+              <ThemeSwitch checked={darkMode} setChecked={switchDarkLight} />
+              {/* <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
@@ -207,7 +215,7 @@ export default function Navbar() {
                 ) : (
                   <RiMoonLine color={!onTop ? 'inherit' : 'white'} />
                 )}
-              </IconButton>
+              </IconButton> */}
             </div>
           </Toolbar>
         </Container>
