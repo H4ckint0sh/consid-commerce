@@ -19,12 +19,12 @@ import { StructuredText, Image } from 'react-datocms';
 import Link from 'next/link';
 
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../redux/cartSlice';
+import { addToCart } from '../../redux/cartSlice';
 
-import Meta from '../../../components/Meta';
-import OtherProducts from '../../../components/product-list/List';
+import Meta from '../../components/Meta';
+import OtherProducts from '../../components/product-list/List';
 
-import { getProductById, allProducts, latestProducts } from '../../../lib/api';
+import { getProductById, allProducts, latestProducts } from '../../lib/api';
 
 const useStyles = makeStyles((theme) => ({
   container: {
