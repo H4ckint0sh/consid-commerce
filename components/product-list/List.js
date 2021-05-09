@@ -4,13 +4,13 @@ import { Container } from '@material-ui/core';
 import ProductList from './ProductList';
 import SectionHeader from './SectionHeader';
 
-const Latest = ({ data }) => (
+const List = ({ data, title }) => (
   <section>
     <Container maxWidth="md">
-      <SectionHeader title="New Arrivals" />
+      <SectionHeader title={title} />
       <ProductList data={data} />
     </Container>
   </section>
 );
 
-export default Latest;
+export default List;

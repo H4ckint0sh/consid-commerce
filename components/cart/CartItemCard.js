@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     padding: 0,
   },
-  cover: {
-    width: 100,
-    marginRight: '20px',
-  },
+  // cover: {
+  //   width: 100,
+  //   marginRight: '20px',
+  // },
   actions: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -84,9 +84,15 @@ export default function MediaControlCard({ data }) {
     <div className={classes.container}>
       <Card className={classes.root}>
         <CardMedia
+          // style{{
+          //   maxWidth: '100px',
+          //   maxHeight: '100px',
+          //   marginRight: '10px',
+          // }=}
+          component="img"
           className={classes.cover}
           image={imageUrl}
-          title="Live from space album cover"
+          title="item picture"
         />
         <div className={classes.details}>
           <CardContent className={classes.content}>

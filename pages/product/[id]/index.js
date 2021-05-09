@@ -22,16 +22,17 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartSlice';
 
 import Meta from '../../../components/Meta';
+import OtherProducts from '../../../components/product-list/List';
 
-import { getProductById, allProducts } from '../../../lib/api';
+import { getProductById, allProducts, latestProducts } from '../../../lib/api';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.down('sm')]: {
-      margin: '100px auto',
+      margin: '100px auto 50px auto',
     },
     [theme.breakpoints.up('sm')]: {
-      margin: '200px auto',
+      margin: '200px auto 50px auto',
     },
   },
   row: {
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Product = ({ product }) => {
+const Product = ({ product, products }) => {
   const { id, name, price, mainImage, description } = product;
   const [quantity, setQuantity] = useState(1);
   const classes = useStyles();
@@ -126,6 +127,7 @@ const Product = ({ product }) => {
           </div>
         </Grid>
       </Grid>
+      <OtherProducts data={products} title="Other products you might like" />
     </Container>
   );
 };
@@ -142,10 +144,12 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { id } = params;
   const product = await getProductById(id);
+  const products = await latestProducts();
 
   return {
     props: {
       product,
+      products,
     },
   };
 }
