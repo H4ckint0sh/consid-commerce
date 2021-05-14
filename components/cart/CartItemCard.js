@@ -84,11 +84,13 @@ export default function MediaControlCard({ data }) {
     <div className={classes.container}>
       <Card className={classes.root}>
         <CardMedia
-          // style{{
-          //   maxWidth: '100px',
-          //   maxHeight: '100px',
-          //   marginRight: '10px',
-          // }=}
+          style={{
+            height: '100%',
+            maxWidth: '100px',
+            maxHeight: '100px',
+            marginRight: '10px',
+            marginTop: '30px',
+          }}
           component="img"
           className={classes.cover}
           image={imageUrl}
